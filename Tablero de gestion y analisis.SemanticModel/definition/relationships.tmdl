@@ -1,0 +1,9 @@
+relationship f4a369c1-c540-4bea-8842-d015b151b84f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Data.'Fecha del servicio'
+	toColumn: LocalDateTable_22077a62-afe1-45bd-860b-55df9330ebfc.Date
+
+relationship 9e8355d5-7f6b-48c7-f83f-7b6484da59c2
+	fromColumn: Data.MESNUM
+	toColumn: TablaMeses.MESNUM
+

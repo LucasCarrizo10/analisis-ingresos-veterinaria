@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Tablero de gestion y analisis"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7dac2a2e-ba6d-489d-aa57-17f74d343a4f"
+  }
+}

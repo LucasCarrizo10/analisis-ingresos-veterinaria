@@ -1,0 +1,128 @@
+table Data
+	lineageTag: 394de5bb-9aaa-4a0f-9a6b-f9c4f38ece20
+
+	column 'Fecha del servicio'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3ce058aa-a9e4-4210-8972-ad3ae0832218
+		summarizeBy: none
+		sourceColumn: Fecha del servicio
+
+		variation Variación
+			isDefault
+			relationship: f4a369c1-c540-4bea-8842-d015b151b84f
+			defaultHierarchy: LocalDateTable_22077a62-afe1-45bd-860b-55df9330ebfc.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Nombre cliente'
+		dataType: string
+		lineageTag: cd4e389a-31bd-4217-9311-eca900179108
+		summarizeBy: none
+		sourceColumn: Nombre cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column Animal
+		dataType: string
+		lineageTag: 96e27af8-8cdc-4823-b2bb-b4a8e4d1fb34
+		summarizeBy: none
+		sourceColumn: Animal
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Raza mascota'
+		dataType: string
+		lineageTag: 4623a2df-5901-45ab-85a1-a72ceb68a820
+		summarizeBy: none
+		sourceColumn: Raza mascota
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nombre paciente'
+		dataType: string
+		lineageTag: 43610ebf-df3f-42da-aaf5-1943b97632ff
+		summarizeBy: none
+		sourceColumn: Nombre paciente
+
+		annotation SummarizationSetBy = Automatic
+
+	column Esterilizado?
+		dataType: string
+		lineageTag: bca9e754-240c-4a81-94bf-880f3ed41129
+		summarizeBy: none
+		sourceColumn: Esterilizado?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Servicio recibido'
+		dataType: string
+		lineageTag: 6a93260b-554b-44fc-9463-0b9acb901ce4
+		summarizeBy: none
+		sourceColumn: Servicio recibido
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Monto pagado'
+		dataType: int64
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: de7af7f3-50e3-479f-a43b-d625597dc507
+		summarizeBy: sum
+		sourceColumn: Monto pagado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Medico Veterinario que atendió'
+		dataType: string
+		lineageTag: f8902f63-326a-4e21-8d7c-2ad58842198a
+		summarizeBy: none
+		sourceColumn: Medico Veterinario que atendió
+
+		annotation SummarizationSetBy = Automatic
+
+	column Diagnóstico
+		dataType: string
+		lineageTag: d3c7fb29-62f9-45df-8af6-148456a160c6
+		summarizeBy: none
+		sourceColumn: Diagnóstico
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tratamiento
+		dataType: string
+		lineageTag: 29686240-ed0e-4742-93fc-1dfe001d3ad5
+		summarizeBy: none
+		sourceColumn: Tratamiento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: bb023c9e-f99c-462b-8187-bbb3ca069e46
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column MESNUM = MONTH(Data[Fecha del servicio])
+		formatString: 0
+		lineageTag: 82549522-fa56-4894-8a09-c084d90adc95
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Data = m
+		mode: import
+		source =
+				let
+				    Origen = Excel.Workbook(File.Contents("C:\power bi\Datosveterinaria.xlsx"), null, true),
+				    Data_Sheet = Origen{[Item="Data",Kind="Sheet"]}[Data],
+				    #"Encabezados promovidos" = Table.PromoteHeaders(Data_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Encabezados promovidos",{{"Fecha del servicio", type date}, {"Nombre cliente", type text}, {"Animal", type text}, {"Raza mascota", type text}, {"Nombre paciente", type text}, {"Esterilizado?", type text}, {"Servicio recibido", type text}, {"Monto pagado", Int64.Type}, {"Medico Veterinario que atendió", type text}, {"Diagnóstico", type text}, {"Tratamiento", type text}, {"Region", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+

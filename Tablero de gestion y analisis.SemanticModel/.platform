@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Tablero de gestion y analisis"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ee4b875e-0851-43f8-86f8-0421d78dfd69"
+  }
+}

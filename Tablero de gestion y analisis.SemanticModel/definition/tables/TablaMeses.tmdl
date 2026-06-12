@@ -1,0 +1,46 @@
+table TablaMeses
+	lineageTag: 40e43794-a711-4cec-bfab-ecb2144fcee3
+
+	column MesAbreviado
+		lineageTag: a3922b03-c1fe-43e4-9f58-d0f7eea25205
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MesAbreviado]
+		sortByColumn: MESNUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MESNUM
+		formatString: 0
+		lineageTag: 17555b8d-7627-417b-8aa0-0371de34ff99
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MESNUM]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TablaMeses = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "MesAbreviado", STRING,
+				    "MESNUM", INTEGER,
+				    {
+				        {"ENE", 1},
+				        {"FEB", 2},
+				        {"MAR", 3},
+				        {"ABR", 4},
+				        {"MAY", 5},
+				        {"JUN", 6},
+				        {"JUL", 7},
+				        {"AGO", 8},
+				        {"SEP", 9},
+				        {"OCT", 10},
+				        {"NOV", 11},
+				        {"DIC", 12}
+				    }
+				)
+
+	annotation PBI_Id = f229ac1e81f64c2ba3d0cc4f9654517b
+
